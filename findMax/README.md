@@ -4,9 +4,9 @@ Hint 1 : (a - b) 的正負號，搭配乘法。
 
 Hint 2 :
 // a 為正數則返回 1，a 為負數則返回 0
-int sign(int32_t a){ return 1 ^ ((a >> 31) & 0x1); }
+`int sign(int32_t a){ return 1 ^ ((a >> 31) & 0x1); }`
 // 回傳a , b最大值
-int max(int32_t a, int32_t b){ return a * sign(a - b) + b * (1 ^ sign(a - b)); }
+`int max(int32_t a, int32_t b){ return a * sign(a - b) + b * (1 ^ sign(a - b)); }`
 
 若 a = INT_MAX(整數的上界) - 2, b = -15 則會遇到 integer overflow，請改出避免 integer overflow 的實做。
 
