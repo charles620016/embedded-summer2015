@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -O1 -Wall
+CFLAGS = -O1 -Wall -pg
 EXECUTABLE = main
 
 
@@ -11,5 +11,5 @@ phonebook.o: phonebook.c phonebook.h
 
 
 clean:
-	rm $(EXECUTABLE) *.o
+	rm $(EXECUTABLE) *.o gmon.out
 

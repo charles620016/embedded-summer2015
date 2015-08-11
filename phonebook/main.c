@@ -39,12 +39,11 @@ int main(int argc, char const *argv[])
     }*/
 
     /* find that whether the input lastName exists or not */
-    while(1){
-        char input[MAX_LAST_NAME_SIZE]; 
-        printf("search the last name (lowercase): ");
-        scanf("%s", input);
+    for(i = 0; i < 100000; i++){
+        char input[MAX_LAST_NAME_SIZE] = "zuzana";
         entry = pHead;
         findName(input, entry);
     }
+
     return 0;
 }
