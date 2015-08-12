@@ -28,22 +28,20 @@ int main(int argc, char const *argv[])
         }
         line[i]='\0';
         i = 0;
-        insert(pHead, line);
+        insert(entry, line);
     }
 
-    /* print the phonebook 
+    /* print the phonebook */ 
     entry = pHead;
-    while(entry->pNext != NULL){
-        printf("%s", entry->lastName);
+    while(entry != NULL){
+        printf("%s\n", entry->lastName);
         entry = entry->pNext;
-    }*/
+    }
 
     /* find that whether the input lastName exists or not */
-    for(i = 0; i < 100000; i++){
-        char input[MAX_LAST_NAME_SIZE] = "zuzana";
-        entry = pHead;
-        findName(input, entry);
-    }
+    char input[MAX_LAST_NAME_SIZE] = "zuzana";
+    entry = pHead;
+    findName(input, entry);
 
     return 0;
 }
