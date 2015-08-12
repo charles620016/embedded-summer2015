@@ -11,5 +11,5 @@ phonebook.o: phonebook.c phonebook.h
 
 
 clean:
-	rm $(EXECUTABLE) *.o gmon.out
+	rm $(EXECUTABLE) *.o *.out
 
