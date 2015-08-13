@@ -1,15 +1,16 @@
 CC = gcc
-CFLAGS = -O1 -Wall -pg
+CFLAGS = -O2 -Wall
 EXECUTABLE = main
 
 
 default: phonebook.o main.c
 	$(CC) $(CFLAGS) phonebook.o main.c -o $(EXECUTABLE)
 
-phonebook.o: phonebook.c phonebook.h
-	$(CC) $(CFLAGS) -c $< -o $@
-
+%.o: %.c
+	$(CC) -c $(CFLAGS) -o $@ $<
 
 clean:
-	rm $(EXECUTABLE) *.o *.out
+	rm $(EXECUTABLE) *.o
 
+cleanperf:
+	rm perf.*

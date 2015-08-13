@@ -16,16 +16,13 @@ PhoneBook *findName(char last[], PhoneBook *pHead)
     return NULL;
 }
 
-void insert(PhoneBook *entries, char *lastName)
+PhoneBook *append(char *lastName, PhoneBook *entry)
 {
-    /* Iterate through the list till we encounter the last entry.*/
-    while(entries->pNext != NULL){
-        entries = entries->pNext;
-    }
-
     /* Allocate memory for the new entry and put lastName in it.*/
-    entries->pNext = (PhoneBook *) malloc(sizeof(PhoneBook));
-    entries = entries->pNext;
-    strcpy(entries->lastName, lastName);
-    entries->pNext = NULL;
+    entry->pNext = (PhoneBook *) malloc(sizeof(PhoneBook));
+    entry = entry->pNext;
+    strcpy(entry->lastName, lastName);
+    entry->pNext = NULL;
+
+    return entry;
 }

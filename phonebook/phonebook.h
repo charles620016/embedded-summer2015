@@ -18,6 +18,6 @@ typedef struct __PHONE_BOOK_ENTRY {
 } PhoneBook;
 
 PhoneBook *findName(char last[], PhoneBook *pHead);
-void insert(PhoneBook *entry, char *lastName);
+PhoneBook *append(char *lastName, PhoneBook *entry);
 
 #endif
