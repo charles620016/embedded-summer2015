@@ -12,7 +12,5 @@ default: phonebook.o main_origin.c main_optimal.c
 	$(CC) -c $(CFLAGS) -o $@ $<
 
 clean:
-	rm $(EXECUTABLE) *.o
+	rm -f $(EXECUTABLE) *.o perf.*
 
-cleanperf:
-	rm perf.*

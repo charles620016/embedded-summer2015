@@ -30,8 +30,9 @@ entry *append(char lastName[], entry *e)
 }
 
 
+
 /* optimal version 1 */
-lastNameEntry *findNameOpt(char lastName[], lastNameEntry *pHead)
+lastNameEntry *findNameOptimal(char lastName[], lastNameEntry *pHead)
 {
     while (pHead != NULL) {
         if (strcasecmp(lastName, pHead->lastName) == 0){
@@ -44,7 +45,7 @@ lastNameEntry *findNameOpt(char lastName[], lastNameEntry *pHead)
     return NULL;
 }
 
-lastNameEntry *appendOpt(char lastName[], lastNameEntry *lne)
+lastNameEntry *appendOptimal(char lastName[], lastNameEntry *lne)
 {
     /* allocate memory for the new entry and put lastName in it.*/
     lne->pNext = (lastNameEntry *) malloc(sizeof(lastNameEntry));
@@ -52,9 +53,6 @@ lastNameEntry *appendOpt(char lastName[], lastNameEntry *lne)
     strcpy(lne->lastName, lastName);
     lne->pNext = NULL;
 
-    /* point to the detail information*/
-    lne->detail = (entry *) malloc(sizeof(entry));
-    strcpy(lne->detail->lastName, lastName);
     return lne;
 }
 
@@ -92,7 +90,7 @@ hashTable *createHashTable(int tableSize)
 entry* findNameHash(char *key, hashTable *ht)
 {
     entry *e;
-    hashIndex index = hash3(key, ht);
+    hashIndex index = hash2(key, ht);
     for(e = ht->list[index]; e != NULL; e = e->pNext){
         if ( strcasecmp(key, e->lastName) == 0 ){
             printf("%s\n", "found it!");
@@ -105,7 +103,7 @@ entry* findNameHash(char *key, hashTable *ht)
 
 int appendHash(char *key, hashTable *ht)
 {
-    hashIndex index = hash3(key, ht);
+    hashIndex index = hash2(key, ht);
     entry *newEntry;
     // entry *currentEntry;
 
@@ -127,7 +125,7 @@ int appendHash(char *key, hashTable *ht)
     return 0;
 }
 
-hashIndex hash2(char *key, hashTable *ht)
+hashIndex hash1(char *key, hashTable *ht)
 {   
     unsigned int hashVal = 0;
     while(*key != '\0'){
@@ -137,7 +135,7 @@ hashIndex hash2(char *key, hashTable *ht)
     return hashVal % ht->tableSize;
 }
 
-hashIndex hash3(char *key, hashTable *ht)
+hashIndex hash2(char *key, hashTable *ht)
 {
     unsigned int hashVal = 0;
     while(*key != '\0'){
