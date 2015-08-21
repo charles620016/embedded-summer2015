@@ -22,7 +22,7 @@ int main(int argc, char const *argv[])
     /* build the entry */
     entry *pHead, *e;
     pHead = (entry *) malloc(sizeof(entry));
-    printf("size of entry : %lu bits\n", sizeof(entry));
+    printf("size of entry : %lu bytes\n", sizeof(entry));
     e = pHead;
     e->pNext = NULL;
     start = clock();

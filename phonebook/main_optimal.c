@@ -22,7 +22,7 @@ int main(int argc, char const *argv[])
     /* build the last name entry */
     lastNameEntry *pHead, *lne;
     pHead = (lastNameEntry *) malloc(sizeof(lastNameEntry));
-    printf("size of entry : %lu bits\n", sizeof(lastNameEntry));
+    printf("size of entry : %lu bytes\n", sizeof(lastNameEntry));
     lne = pHead;
     lne->pNext = NULL;
     start = clock();
