@@ -3,7 +3,6 @@
 *.ko
 *.obj
 *.elf
-main
 
 # Precompiled Headers
 *.gch
@@ -31,3 +30,6 @@ main
 
 # Debug files
 *.dSYM/
+
+# Other files
+perf*
