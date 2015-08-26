@@ -30,7 +30,7 @@ void bmpLoad(BMP *bmp, const char *fileName) {
     bmp->width = B2U32(info,4);
     bmp->height = B2U32(info,8);
     bmp->planes = B2U16(info,12); assert(bmp->planes==1);
-    bmp->bitsPerPixel = B2U16(info,14); assert(bmp->bitsPerPixel==24);
+    bmp->bitsPerPixel = B2U16(info,14); assert(bmp->bitsPerPixel==32);
     bmp->compression = B2U32(info,16);
     bmp->imageSize = B2U32(info,20);
     bmp->xPixelsPerM = B2U32(info,24);
@@ -39,7 +39,7 @@ void bmpLoad(BMP *bmp, const char *fileName) {
     bmp->colorsImportant = B2U32(info,36);
 
     // Image data
-    bmp->data = (BYTE*) malloc( DataSize(bmp) );
+    bmp->data = (uint32_t*) malloc( DataSize(bmp) );
     fseek(file, bmp->dataOffset, SEEK_SET);
     fread(bmp->data, 1, DataSize(bmp), file);
     fclose (file);
@@ -51,21 +51,30 @@ void bmpPrint(BMP *bmp) {
     printf("FileSize = %u \n", bmp->fileSize);
     printf("DataOffset = %u \n", bmp->dataOffset);
     printf("==== Info ======\n");
-    printf("size = %u \n", bmp->size);
+    printf("Info size = %u \n", bmp->size);
     printf("Width = %u \n", bmp->width);
     printf("Height = %u \n", bmp->height);
     printf("BitsPerPixel = %u \n", bmp->bitsPerPixel);
     printf("Compression = %u \n", bmp->compression);
-    printf("ImageSize = %u \n", bmp->imageSize);
+    printf("================\n");
 }
 
-void bmpSetPixel(BMP *bmp, int x, int y, BYTE R, BYTE G, BYTE B) {
-    Pixel *pixel;
-    int idx = y * bmp->width + x;
-    pixel = (Pixel*) &bmp->data[idx * sizeof(Pixel)];
-    pixel->R = R;
-    pixel->G = G;
-    pixel->B = B;
+void rgbaToBw(BMP *bmp, int width, int height, long stride){
+    int row, col;
+    uint32_t pixel, r, g, b, a, bw;
+    uint32_t *data = bmp->data;
+
+    for (row = 0; row < height; row++) {
+        for (col = 0; col < width; col++) {
+            pixel = data[col + row * stride / 4];
+            a = (pixel >> 24) & 0xff;
+            r = (pixel >> 16) & 0xff;
+            g = (pixel >> 8) & 0xff;
+            b = pixel & 0xff;
+            bw = (uint32_t) (r * 0.299 + g * 0.587 + b * 0.114);
+            data[col + row * stride / 4] = (a << 24) + (bw << 16) + (bw << 8) + (bw);
+        }
+    }
 }
 
 void bmpSave(BMP *bmp, const char *fileName) {
@@ -81,4 +90,6 @@ void bmpSave(BMP *bmp, const char *fileName) {
     fseek(file, bmp->dataOffset, SEEK_SET);
     fwrite(bmp->data, 1, DataSize(bmp), file);
     fclose(file);
+
+    printf("Save the picture successfully!\n");
 }
