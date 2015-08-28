@@ -60,3 +60,9 @@ float table_G[TABLE_SIZE];
 float table_B[TABLE_SIZE];
 void rgbaToBw_v1(BMP *bmp, int width, int height, long stride); 
 void generateRGBTable();
+
+/* version 2 : using pointer instead of bitwise operating*/
+void rgbaToBw_v2(BMP *bmp, int width, int height, long stride);
+
+/* version 3 : version1 + version2*/
+void rgbaToBw_v3(BMP *bmp, int width, int height, long stride);

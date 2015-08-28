@@ -120,3 +120,37 @@ void generateRGBTable(){
         table_B[i] = i * 0.114;
     }
 }
+
+void rgbaToBw_v2(BMP *bmp, int width, int height, long stride){
+    int row, col;
+    uint32_t *pixel = bmp->data;
+    BYTE *r, *g, *b, bw;
+
+    for (row = 0; row < height; row++) {
+        for (col = 0; col < width; col++) {
+            r = (BYTE *) pixel + 2;
+            g = (BYTE *) pixel + 1;
+            b = (BYTE *) pixel;
+            bw = (*r * 0.299) + (*g * 0.587) + (*b * 0.114);
+            *r = *g = *b = bw;
+            pixel++;
+        }
+    }
+}
+
+void rgbaToBw_v3(BMP *bmp, int width, int height, long stride){
+    int row, col;
+    uint32_t *pixel = bmp->data;
+    BYTE *r, *g, *b, bw;
+
+    for (row = 0; row < height; row++) {
+        for (col = 0; col < width; col++) {
+            r = (BYTE *) pixel + 2;
+            g = (BYTE *) pixel + 1;
+            b = (BYTE *) pixel;
+            bw = table_R[*r] + table_G[*g] + table_B[*b];
+            *r = *g = *b = bw;
+            pixel++;
+        }
+    }
+}

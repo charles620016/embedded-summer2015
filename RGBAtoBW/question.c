@@ -5,7 +5,7 @@ void rgba_to_bw(uint32_t *bitmap, int width, int height, long stride) {
     uint32_t pixel, r, g, b, a, bw;
     for (row = 0; row < height; row++) {
         for (col = 0; col < width; col++) {
-            pixel = bitmap[col + row + stride / 4];
+            pixel = bitmap[col + row * stride / 4];
             a = (pixel >> 24) & 0xff;
             r = (pixel >> 16) & 0xff;
             g = (pixel >> 8) & 0xff;
