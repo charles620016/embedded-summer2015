@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
     /* Load the image and print the infomation */
     bmpLoad(bmp, openfile);
     long stride = bmp->width * 4;
-    //bmpPrint(bmp);
+    // bmpPrint(bmp);
 
     /* RGBA to BW */
     printf("RGBA to BW is in progress....\n");

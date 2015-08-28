@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -O0 -Wall
-EXECUTABLE = main main_v1 main_v2
+EXECUTABLE = main main_v1 main_v2 main_v3
 
 
 default: bmp.o main.c
