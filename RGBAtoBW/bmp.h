@@ -7,7 +7,8 @@
 #define U16(x)  ((unsigned short) (x))
 #define U32(x)  ((int) (x))
 #define B2U16(bytes,offset)  (U16(bytes[offset]) | U16(bytes[offset+1]) << 8)
-#define B2U32(bytes,offset)  (U32(bytes[offset]) | U32(bytes[offset+1]) << 8 | U32(bytes[offset+2]) << 16 | U32(bytes[offset+3]) << 24)
+#define B2U32(bytes,offset)  (U32(bytes[offset]) | U32(bytes[offset+1]) << 8 | \
+                            U32(bytes[offset+2]) << 16 | U32(bytes[offset+3]) << 24)
                    
 typedef unsigned char BYTE;
 
@@ -66,3 +67,9 @@ void rgbaToBw_v2(BMP *bmp, int width, int height, long stride);
 
 /* version 3 : version1 + version2*/
 void rgbaToBw_v3(BMP *bmp, int width, int height, long stride);
+
+/* version 4 : NEON instruction set */
+void rgbaToBw_v4(BMP *bmp, int width, int height, long stride);
+
+/* version 4 : NEON (unroll loop + PLD) */
+void rgbaToBw_v5(BMP *bmp, int width, int height, long stride);

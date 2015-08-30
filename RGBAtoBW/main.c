@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
     clock_t start = 0;
     clock_t end = 0;
     int loop = 50;
-    int i;
+    unsigned int i;
 
     /* Load the image and print the infomation */
     bmpLoad(bmp, openfile);
@@ -53,6 +53,24 @@ int main(int argc, char *argv[]) {
         start = clock();
         for(i = 0; i < loop; i++){
             rgbaToBw_v3(bmp, bmp->width, bmp->height, stride);
+        }
+        end = clock();
+    #endif
+
+    #if defined(VERSION4)
+        printf("[Version 4] : NEON\n");
+        start = clock();
+        for(i = 0; i < loop; i++){
+            rgbaToBw_v4(bmp->data, bmp->width, bmp->height, stride);
+        }
+        end = clock();
+    #endif
+    
+    #if defined(VERSION5)
+        printf("[Version 5] : NEON (unroll loop + PLD)\n");
+        start = clock();
+        for(i = 0; i < loop; i++){
+            rgbaToBw_v5(bmp->data, bmp->width, bmp->height, stride);
         }
         end = clock();
     #endif
