@@ -28,10 +28,10 @@
 
 Hint: 如果先計算針對「乘上 0.299」一類的運算，先行計算後建立表格呢？
 <br />
----
+***
 <br />
-###*Implementation：*
-[詳細筆記參考：Week 4 (Aug 24) 課堂課驗](https://embedded2015.hackpad.com/ep/pad/static/7sVmkgm4Hre)
+###*Implementation*
+[詳細筆記參考：Week 4 (Aug 24) 課堂測驗](https://embedded2015.hackpad.com/ep/pad/static/7sVmkgm4Hre)
 
 **BMP** (BitMaP) 檔是是很早以前微軟所開發並使用在 Windows 系統上的圖型格式，通常不壓縮，不像 JPG、GIF、PNG 會有破壞性或非破壞性的壓縮。雖然 BMP 缺點是檔案非常大，不過因為沒有壓縮，即使不借助 OpenCV、ImageMagick 或 .NET Framework 等等，也可以很容易地直接用 Standard C Library 作影像處理。
 
