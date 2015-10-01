@@ -4,6 +4,8 @@
 #include <time.h>
 #include "phonebook.h"
 
+#define INPUT_SIZE 8
+
 int main(int argc, char const *argv[])
 {
     FILE *fp;
@@ -24,12 +26,12 @@ int main(int argc, char const *argv[])
     hashTable *ht = createHashTable(tableSize);
     printf("hash table size (prime number) : %d\n", tableSize);
 
-    /* build the entry */
-    entry *pHead, *e;
-    pHead = (entry *) malloc(sizeof(entry));
-    printf("size of entry : %lu bytes\n", sizeof(entry));
-    e = pHead;
-    e->pNext = NULL;
+    /* build the lastNameEntry */
+    lastNameEntry *pHead, *lne;
+    pHead = (lastNameEntry *) malloc(sizeof(lastNameEntry));
+    printf("size of entry : %lu bytes\n", sizeof(lastNameEntry));
+    lne = pHead;
+    lne->pNext = NULL;
     start = clock();
     while (fgets(line, sizeof(line), fp)){
         while(line[i] != '\0'){
@@ -42,15 +44,18 @@ int main(int argc, char const *argv[])
     end = clock();
     cpuTimeUsed1 = ((double) (end - start)) / CLOCKS_PER_SEC;
 
-    /* find that whether the input lastName exists or not */
-    char input[MAX_LAST_NAME_SIZE] = "zyxel";
-    printf("total words : 349900\n");
-    printf("the last name which want to find out : %s\nresult : ", input);
-    e = pHead;
+    /* input lastName */
+    char input[INPUT_SIZE][MAX_LAST_NAME_SIZE] = {"uninvolved","zyxel","whiteshank", 
+                "odontomous", "pungoteague", "reweighted", "xiphisternal", "yakattalo"};
     
     /* compute the execution time */
+    int j;
+    lne = pHead;
     start = clock();
-    findNameHash(input, ht);
+    for(j = 0; j < INPUT_SIZE; j++){
+        findNameHash(input[j], ht);
+        lne = pHead;
+    }
     end = clock();
     cpuTimeUsed2 = ((double) (end - start)) / CLOCKS_PER_SEC;
     printf("execution time of appendHash() : %lf\n", cpuTimeUsed1);

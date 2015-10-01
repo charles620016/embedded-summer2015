@@ -1,20 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
 #include "phonebook.h"
 
 /* original version */
-entry *findName(char lastname[], entry *pHead)
+entry *findName(char lastName[], entry *pHead)
 {
     while (pHead != NULL) {
-        if (strcasecmp(lastname, pHead->lastName) == 0){
-            printf("%s\n", "found it!");
+        if (strcasecmp(lastName, pHead->lastName) == 0){
+            printf(" %12s  is found!\n", lastName);
             return pHead;
         }
         pHead = pHead->pNext;
     }
-    printf("%s\n", "not found");
+    printf(" %12s  is not found!\n", lastName);
     return NULL;
 }
 
@@ -36,12 +35,12 @@ lastNameEntry *findNameOptimal(char lastName[], lastNameEntry *pHead)
 {
     while (pHead != NULL) {
         if (strcasecmp(lastName, pHead->lastName) == 0){
-            printf("%s\n", "found it!");
+            printf(" %12s  is found!\n", lastName);
             return pHead;
         }
         pHead = pHead->pNext;
     }
-    printf("%s\n", "not found");
+    printf(" %12s  is found!\n", lastName);
     return NULL;
 }
 
@@ -73,7 +72,7 @@ hashTable *createHashTable(int tableSize)
     }
 
     /* Allocate array of list. */
-    if( (ht->list = (entry **) malloc(sizeof(entry *)*tableSize)) == NULL ) {
+    if( (ht->list = (lastNameEntry **)malloc(sizeof(lastNameEntry *)*tableSize)) == NULL ) {
         return NULL;
     }
 
@@ -87,33 +86,35 @@ hashTable *createHashTable(int tableSize)
     return ht;
 }
 
-entry* findNameHash(char *key, hashTable *ht)
+lastNameEntry* findNameHash(char *key, hashTable *ht)
 {
-    entry *e;
+    lastNameEntry *lne;
     hashIndex index = hash2(key, ht);
-    for(e = ht->list[index]; e != NULL; e = e->pNext){
-        if ( strcasecmp(key, e->lastName) == 0 ){
-            printf("%s\n", "found it!");
-            return e;
+    
+    /* search the bucket */
+    for(lne = ht->list[index]; lne != NULL; lne = lne->pNext){
+        if ( strcasecmp(key, lne->lastName) == 0 ){
+            printf(" %12s is found!\n", key);
+            return lne;
         }
     }
-    printf("%s\n", "not found");
+    printf(" %12s is not found!\n", key);
     return NULL;
 }
 
 int appendHash(char *key, hashTable *ht)
 {
     hashIndex index = hash2(key, ht);
-    entry *newEntry;
-    // entry *currentEntry;
+    lastNameEntry *newEntry;
+    // lastNameEntry *currentEntry;
 
-    /* Does entry already exist? If it does, don't append it again. 
+    /* Does lastNameEntry already exist? If it does, don't append it again. 
     if( (currentEntry = findNameHash(key, ht)) != NULL ){
         return 1;
     }*/
 
-    /* attempt to allocate memory for entry */
-    if ((newEntry = (entry *) malloc(sizeof(entry))) == NULL){
+    /* attempt to allocate memory for lastNameEntry */
+    if ((newEntry = (lastNameEntry *) malloc(sizeof(lastNameEntry))) == NULL){
         return 2;
     }
 

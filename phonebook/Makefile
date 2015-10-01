@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -O2 -Wall
+CFLAGS = -O0 -Wall
 EXECUTABLE = main_origin main_optimal main_hash
 
 

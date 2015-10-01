@@ -4,6 +4,8 @@
 #include <time.h>
 #include "phonebook.h"
 
+#define INPUT_SIZE 8
+
 int main(int argc, char const *argv[])
 {
     FILE *fp;
@@ -38,15 +40,18 @@ int main(int argc, char const *argv[])
     cpuTimeUsed1 = ((double) (end - start)) / CLOCKS_PER_SEC;
 
 
-    /* find that whether the input lastName exists or not */
-    char input[MAX_LAST_NAME_SIZE] = "zyxel";
-    printf("total words : 349900\n");
-    printf("the last name which want to find out : %s\nresult : ", input);
-    e = pHead;
+    /* input lastName */
+    char input[INPUT_SIZE][MAX_LAST_NAME_SIZE] = {"uninvolved","zyxel","whiteshank", 
+                "odontomous", "pungoteague", "reweighted", "xiphisternal", "yakattalo"};
     
     /* compute the execution time */
+    e = pHead;
+    int j;
     start = clock();
-    findName(input, e);
+    for(j = 0; j < INPUT_SIZE; j++){
+        findName(input[j], e);
+        e = pHead;
+    }
     end = clock();
     cpuTimeUsed2 = ((double) (end - start)) / CLOCKS_PER_SEC;
     printf("execution time of append() : %lf\n", cpuTimeUsed1);
