@@ -33,3 +33,5 @@ hint：cache miss
 hint：hash function
 
 ---
+
+[Phone book 效能分析與討論](https://charles620016.hackpad.com/Linux-Perf-lifHi7P9FAL)
