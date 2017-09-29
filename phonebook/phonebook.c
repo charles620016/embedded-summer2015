@@ -40,7 +40,7 @@ lastNameEntry *findNameOptimal(char lastName[], lastNameEntry *pHead)
         }
         pHead = pHead->pNext;
     }
-    printf(" %12s  is found!\n", lastName);
+    printf(" %12s  is not found!\n", lastName);
     return NULL;
 }
 
